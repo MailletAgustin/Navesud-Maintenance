@@ -23,3 +23,13 @@ app.get('*', function(req, res) {
 app.listen(80, function() {
     console.log('Mantenimiento en curso');
 });
+
+// Listen port 443 for https and redirect to http
+var http = require('http');
+http.createServer(function(req, res) {
+    res.writeHead(301, {
+        'Location': 'http://' + req.headers.host + req.url
+    });
+    res.end();
+}
+).listen(443);
